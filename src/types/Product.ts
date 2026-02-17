@@ -12,7 +12,7 @@ export interface Product {
   currencyId: string;
   categoryId: string;
 
-  pictures: string;
+  pictures: string[];
 
   vendorCode: string;
   vendor?: string;

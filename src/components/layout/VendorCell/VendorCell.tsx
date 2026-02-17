@@ -25,7 +25,7 @@ export const VendorCell = ({ value }: { value: string }) => {
   return (
     <Tooltip>
       <TooltipTrigger asChild>{content}</TooltipTrigger>
-      <TooltipContent>{value}</TooltipContent>
+      <TooltipContent bgColor="#6E6E49">{value}</TooltipContent>
     </Tooltip>
   );
 }

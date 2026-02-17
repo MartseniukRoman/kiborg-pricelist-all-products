@@ -155,3 +155,75 @@
 /* [data-slot="accordion-content"] {
   min-height: unset;
 } */
+
+/* Product Card */
+
+@layer components {
+  .product-description {
+    @apply font-[Unbounded] text-[12px] leading-relaxed;
+  }
+
+  /* ===== Заголовки (все одинаковые) ===== */
+  .product-description h1,
+  .product-description h2,
+  .product-description h3,
+  .product-description h4,
+  .product-description h5,
+  .product-description h6 {
+    @apply text-[14px] font-semibold mb-2 mt-3;
+  }
+
+  /* ===== Параграфы ===== */
+  .product-description p {
+    @apply mb-2 font-normal;
+  }
+
+  /* ===== Списки ===== */
+  .product-description ul,
+  .product-description ol {
+    @apply mb-2 pl-4;
+    list-style: none;
+  }
+
+  .product-description li {
+    @apply relative mb-1 font-normal;
+  }
+
+  .product-description li::before {
+    content: "- ";
+    position: absolute;
+    left: -12px;
+  }
+
+  /* ===== Ссылки ===== */
+  .product-description a {
+    @apply underline font-normal;
+    color: #6E6E49;
+  }
+
+  /* ===== Изображения ===== */
+  .product-description img {
+    @apply block w-full h-auto my-3 rounded-md;
+  }
+
+  /* ===== Таблицы ===== */
+  .product-description table {
+    @apply w-full my-3 border-collapse;
+  }
+
+  .product-description td,
+  .product-description th {
+    @apply border border-[#6E6E49] p-2 text-[12px];
+  }
+
+  /* ===== Жирный текст ===== */
+  .product-description strong,
+  .product-description b {
+    @apply font-semibold;
+  }
+
+  /* ===== Убираем лишние inline стили если вдруг остались ===== */
+  .product-description * {
+    font-family: "Unbounded", sans-serif !important;
+  }
+}

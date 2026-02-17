@@ -1,5 +1,7 @@
 import CloseIcon from "@/assets/icons/CloseIcon";
 import { Badge } from "@/components/ui/badge";
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
+import Autoplay from "embla-carousel-autoplay";
 import {
   DialogClose,
   DialogContent,
@@ -8,7 +10,14 @@ import {
 } from "@/components/ui/dialog";
 import type { Product } from "@/types/Product";
 
+import DOMPurify from "dompurify";
+
+
 export const ProductCard = ({ product }: { product: Product }) => {
+  const cleanHtml = DOMPurify.sanitize(product.description, {
+    FORBID_ATTR: ["style"], // запрещаем inline стили
+  });
+
   return (
     <DialogContent
       className="max-w-[95%] font-[Unbounded] overflow-hidden border-0 p-0"
@@ -24,11 +33,32 @@ export const ProductCard = ({ product }: { product: Product }) => {
       </DialogHeader>
       <div className="no-scrollbar max-h-[70vh] px-6 mb-6 overflow-y-auto">
         <div className="relative mb-5 pt-5 flex flex-col">
-          <img
-            src={product.pictures}
-            alt={product.name}
-            className="mb-2  md:w-80 aspect-square object-cover m-auto"
-          />
+          <Carousel
+            className="relative"
+            opts={{
+              loop: true,
+            }}
+            plugins={[
+              Autoplay({
+                delay: 3000,
+              }),
+            ]}
+          >
+            <CarouselContent>
+              {product.pictures.map((pic) => (
+                <CarouselItem key={pic}>
+                  <img
+                    src={pic}
+                    alt={product.name}
+                    className="mb-2  md:w-80 aspect-square object-contain m-auto"
+                  />
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious className="absolute left-0 bg-[#8f9250] hover:bg-[#6e6e49] border-0" />
+            <CarouselNext className="absolute right-0 bg-[#8f9250] hover:bg-[#6e6e49] border-0" />
+          </Carousel>
+
           <div className="flex gap-2 flex-wrap items-center">
             <Badge className="bg-[#8F9250]">РРЦ: {product.price} грн</Badge>
             {product.optPrice && (
@@ -41,16 +71,21 @@ export const ProductCard = ({ product }: { product: Product }) => {
             </Badge>
           </div>
         </div>
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between mb-4">
           <div className="text-[12px]">Артикул - {product.vendorCode}</div>
           <a
             href={product.url}
-            className="block text-[12px] px-3 py-2.5 rounded text-white font-semibold bg-[#8f9250] text-center"
+            className="block text-[12px] px-3 py-2.5 rounded text-white font-semibold bg-[#8f9250] text-center transition-colors hover:bg-[#6E6E49]"
           >
             Переглянути товар
           </a>
         </div>
-        {/* <div className="whitespace-pre-line">{product.description}</div> */}
+        <div className="whitespace-pre-line">
+          <div
+            className="flex flex-col gap-2 product-description"
+            dangerouslySetInnerHTML={{ __html: cleanHtml }}
+          />
+        </div>
       </div>
     </DialogContent>
   );

@@ -11,7 +11,13 @@ const App = () => {
   const [categories, setCategories] = useState<Category[]>([]);
 
   useEffect(() => {
-    categoriesService.get().then((data) => setCategories(data));
+    categoriesService.get().then((data) => {
+      const cats = data.map((cat: Category) => {
+        if (cat.id === 16) return {...cat, isEmpty: true}
+        return {...cat, isEmpty: cat.isEmpty ? cat.isEmpty : false}
+      });
+      setCategories(cats);
+    });
   }, []);
 
   return (
@@ -20,9 +26,7 @@ const App = () => {
       <div className="max-w-300 m-auto rounded-t-[10px] overflow-hidden">
         {categories.length ? (
           <div>
-            <ProductsAccordion
-              categories={categories}
-            />
+            <ProductsAccordion categories={categories} />
             <Footer
               classNames={cn({
                 "bg-[#EBE9DE]": Math.floor(categories.length % 2) === 0,
