@@ -12,8 +12,12 @@ import type { Product } from "@/types/Product";
 import { productsService } from "@/api/services/productsService";
 import { Loader } from "../Loader";
 
-export const ProductsAccordion: React.FC<{ categories: Category[] }> = ({
-  categories,
+type Props = {
+  categories: Category[]
+}
+
+export const ProductsAccordion: React.FC<Props> = ({
+  categories
 }) => {
   const [opened, setOpened] = useState<string[]>([]);
 
@@ -72,7 +76,7 @@ export const ProductsAccordion: React.FC<{ categories: Category[] }> = ({
                 {loadingByCategory[category.id] ? (
                   <Loader />
                 ) : productsByCategory[category.id] ? (
-                  <ProductsTable products={productsByCategory[category.id]} />
+                  <ProductsTable products={productsByCategory[category.id]}/>
                 ) : null}
               </AccordionContent>
             </AccordionItem>

@@ -20,7 +20,9 @@ const App = () => {
       <div className="max-w-300 m-auto rounded-t-[10px] overflow-hidden">
         {categories.length ? (
           <div>
-            <ProductsAccordion categories={categories} />
+            <ProductsAccordion
+              categories={categories}
+            />
             <Footer
               classNames={cn({
                 "bg-[#EBE9DE]": Math.floor(categories.length % 2) === 0,

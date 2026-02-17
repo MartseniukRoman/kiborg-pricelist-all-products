@@ -1,8 +1,19 @@
-import {  Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import {
+  Table,
+  TableBody,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 import type { Product } from "@/types/Product";
 import type React from "react";
+import TableItem from "../TableItem/TableItem";
 
-const ProductsTable: React.FC<{ products: Product[] }> = ({ products }) => {
+type Props = {
+  products: Product[]
+}
+
+const ProductsTable: React.FC<Props> = ({ products }) => {
   return (
     <>
       <Table className="table-fixed w-full">
@@ -33,23 +44,7 @@ const ProductsTable: React.FC<{ products: Product[] }> = ({ products }) => {
         <TableBody className="relative">
           {products.map((product) => {
             return (
-              <TableRow key={product.id} className="text-center">
-                <TableCell className="font-[Unbounded] font-medium text-[10px] sm:text-[14px]">
-                  {product.vendorCode}
-                </TableCell>
-                <TableCell className="font-[Unbounded] w-[40%] text-[12px] sm:text-[16px] sm:max-w-[60%] truncate text-left">
-                  {product.name}
-                </TableCell>
-                <TableCell className="font-[Unbounded] text-center text-[9px] sm:text-[14px]">
-                  {Math.round(product.price)}
-                </TableCell>
-                <TableCell className="font-[Unbounded] text-center text-[9px] sm:text-[14px]">
-                  {product.optPrice ? Math.round(product.optPrice) : "-"}
-                </TableCell>
-                <TableCell className="font-[Unbounded] text-center text-[9px] sm:text-[14px]">
-                  {Math.round(product.dropPrice)}
-                </TableCell>
-              </TableRow>
+              <TableItem key={product.id} product={product}/>
             );
           })}
         </TableBody>
