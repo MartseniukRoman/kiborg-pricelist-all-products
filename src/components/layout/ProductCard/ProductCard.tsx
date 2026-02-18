@@ -12,11 +12,29 @@ import type { Product } from "@/types/Product";
 
 import DOMPurify from "dompurify";
 
+const BASE_URL = "https://kiborg.com.ua";
+
+function fixImages(html: string) {
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(html, "text/html");
+
+  doc.querySelectorAll("img").forEach((img) => {
+    const src = img.getAttribute("src");
+
+    if (src && src.startsWith("/")) {
+      img.setAttribute("src", BASE_URL + src);
+    }
+  });
+
+  return doc.body.innerHTML;
+}
 
 export const ProductCard = ({ product }: { product: Product }) => {
-  const cleanHtml = DOMPurify.sanitize(product.description, {
+  const sanitized = DOMPurify.sanitize(product.description, {
     FORBID_ATTR: ["style"], // запрещаем inline стили
   });
+
+  const cleanHtml = fixImages(sanitized);
 
   return (
     <DialogContent
