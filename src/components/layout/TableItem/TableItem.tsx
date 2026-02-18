@@ -14,19 +14,23 @@ const TableItem: React.FC<Props> = ({ product }) => {
     <Dialog>
       <DialogTrigger asChild>
         <TableRow key={product.id} className="text-center cursor-pointer">
-          <TableCell className="font-[Unbounded] font-medium text-[10px] sm:text-[14px] truncate">
+          <TableCell className="border border-border font-[Unbounded] font-medium text-[10px] sm:text-[14px] truncate">
             <VendorCell value={product.vendorCode} />
           </TableCell>
-          <TableCell className="font-[Unbounded] w-[40%] text-[12px] sm:text-[16px] sm:max-w-[60%] truncate text-left">
+
+          <TableCell className="border border-border font-[Unbounded] w-[40%] text-[12px] sm:text-[16px] sm:max-w-[60%] truncate text-left">
             {product.name}
           </TableCell>
-          <TableCell className="font-[Unbounded] text-center text-[9px] sm:text-[14px]">
+
+          <TableCell className="border border-border font-[Unbounded] text-center text-[9px] sm:text-[14px]">
             {Math.round(product.price)}
           </TableCell>
-          <TableCell className="font-[Unbounded] text-center text-[9px] sm:text-[14px]">
+
+          <TableCell className="border border-border font-[Unbounded] text-center text-[9px] sm:text-[14px]">
             {product.optPrice ? Math.round(product.optPrice) : "-"}
           </TableCell>
-          <TableCell className="font-[Unbounded] text-center text-[9px] sm:text-[14px]">
+
+          <TableCell className="border border-border font-[Unbounded] text-center text-[9px] sm:text-[14px]">
             {Math.round(product.dropPrice)}
           </TableCell>
         </TableRow>
