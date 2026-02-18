@@ -22,15 +22,15 @@ const TableItem: React.FC<Props> = ({ product }) => {
             {product.name}
           </TableCell>
 
-          <TableCell className="border border-border font-[Unbounded] text-center text-[9px] sm:text-[14px]">
+          <TableCell className="border border-border font-[Unbounded] text-center text-[7px] sm:text-[14px]">
             {Math.round(product.price)}
           </TableCell>
 
-          <TableCell className="border border-border font-[Unbounded] text-center text-[9px] sm:text-[14px]">
+          <TableCell className="border border-border font-[Unbounded] text-center text-[7px] sm:text-[14px]">
             {product.optPrice ? Math.round(product.optPrice) : "-"}
           </TableCell>
 
-          <TableCell className="border border-border font-[Unbounded] text-center text-[9px] sm:text-[14px]">
+          <TableCell className="border border-border font-[Unbounded] text-center text-[7px] sm:text-[14px]">
             {Math.round(product.dropPrice)}
           </TableCell>
         </TableRow>
