@@ -18,6 +18,7 @@ function fixImages(html: string) {
   const parser = new DOMParser();
   const doc = parser.parseFromString(html, "text/html");
 
+  // Фикс картинок
   doc.querySelectorAll("img").forEach((img) => {
     const src = img.getAttribute("src");
 
@@ -25,6 +26,15 @@ function fixImages(html: string) {
       img.setAttribute("src", BASE_URL + src);
     }
   });
+
+  // Фикс таблиц
+  doc.querySelectorAll("table").forEach((table) => {
+    const wrapper = doc.createElement("div");
+    wrapper.className = "table-scroll-wrapper";
+    table.parentNode?.insertBefore(wrapper, table);
+    wrapper.appendChild(table);
+  });
+
 
   return doc.body.innerHTML;
 }

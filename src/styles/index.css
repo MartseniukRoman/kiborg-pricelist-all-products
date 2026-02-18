@@ -207,14 +207,25 @@
   }
 
   /* ===== Таблицы ===== */
-  .product-description table {
-    @apply w-full my-3 border-collapse;
-  }
+  .product-description .table-scroll-wrapper {
+  @apply w-full my-3 overflow-x-auto;
+}
+
+.product-description table {
+  border-collapse: collapse;
+  width: max-content;   /* 🔥 ключовий момент */
+  min-width: 100%;      /* щоб не була менше контейнера */
+}
 
   .product-description td,
   .product-description th {
     @apply border border-[#6E6E49] p-2 text-[12px];
   }
+
+  .product-description .table-scroll-wrapper {
+  @apply w-full my-3 overflow-x-auto overflow-y-hidden;
+  display: block;
+}
 
   /* ===== Жирный текст ===== */
   .product-description strong,
