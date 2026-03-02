@@ -13,7 +13,6 @@ const App = () => {
   useEffect(() => {
     categoriesService.get().then((data) => {
       const cats = data.map((cat: Category) => {
-        if (cat.id === 16) return {...cat, isEmpty: true}
         return {...cat, isEmpty: cat.isEmpty ? cat.isEmpty : false}
       });
       setCategories(cats);
